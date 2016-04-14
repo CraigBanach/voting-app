@@ -10,7 +10,7 @@ require('dotenv').config();
 
 
 var GITHUB_CLIENT_ID = process.env.GITHUB_KEY;
-console.log(process.env.GITHUB_KEY);
+//console.log(process.env.GITHUB_KEY);
 var GITHUB_CLIENT_SECRET = process.env.GITHUB_SECRET;
 
 

@@ -6,7 +6,7 @@ var session = require('express-session');
 
 var app = express();
 app.set('view engine', 'ejs')
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(__dirname + '/views'))
 // configure Express
 app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
 // Initialize Passport!  Also use passport.session() middleware, to support
