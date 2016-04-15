@@ -25,7 +25,7 @@ module.exports = {
         return new Promise(function (resolve, reject) {
             collection.find(query).toArray(function(err, docs) {
             if (err) console.log(err);
-            console.log(docs);
+            //console.log(docs);
             resolve(docs);
             })
         })
@@ -35,16 +35,33 @@ module.exports = {
         var database = db.getDB();
         var collection = database.collection("polls");
         var id = require('mongodb').ObjectID(pollID);
-        console.log(id);
+        //console.log(id);
         var query = {
             _id: id
         };
-        console.log(query);
+        //console.log(query);
         return new Promise(function (resolve, reject) {
             collection.find(query).toArray(function(err, docs) {
                 if (err) console.log(err);
-                console.log(docs);
+                //console.log(docs);
                 resolve(docs);
+            });
+        });
+    },
+    
+    updatePoll : function (pollID, option, user) {
+        var database = db.getDB();
+        var collection = database.collection("polls");
+        var id = require('mongodb').ObjectID(pollID);
+        var query = {
+            _id: id
+        };
+        return new Promise(function (resolve, reject) {
+            collection.find(query).toArray(function(err, docs) {
+                if (err) console.log(err);
+                docs[0].options[option]++;
+                collection.update(query, docs[0]);
+                resolve(docs[0].options);
             });
         });
     }

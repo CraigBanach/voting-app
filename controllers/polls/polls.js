@@ -28,11 +28,23 @@ router.post("/submit", jsonParser,  function(req, res) {
 })
 
 router.get("/poll/*", function(req, res) {
-  console.log("received requrest");
+  //console.log("received requrest");
   pollsDB.pullPoll(req.params[0]).then(function (docs) {
-    console.log("sending render request");
-    docs[0].username = req.session.passport.user.username;
-  res.render("home/poll/poll.ejs", docs[0])});
-})
+    //console.log("sending render request");
+    res.render("home/poll/poll.ejs", {username:req.session.passport.user.username, poll: docs[0]});
+  });
+});
+
+router.get("/updatepoll", function(req, res) {
+  
+  pollsDB.updatePoll(req.query.pollID, req.query.option, req.session.passport.user.id)
+  .then(function(doc) {
+    res.setHeader('Content-Type', 'application/json');
+    //res.status(200);
+    res.send(doc);
+    console.log(doc);
+    console.log("message sent");
+  });
+});
 
 module.exports = router;
