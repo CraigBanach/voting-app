@@ -2,6 +2,7 @@
 var globalChart;
 
 function updatePage(poll) {
+    alert("fired");
     var pollName = poll.pollName;
     $(".title-text").text(pollName);
     var data = {
