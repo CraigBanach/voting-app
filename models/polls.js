@@ -4,6 +4,16 @@ module.exports = {
     createPoll : function (user, pollName, answerArray) {
         var database = db.getDB();
         var collection = database.collection("polls");
+        var counter = 0;
+        for (var option in answerArray) {
+            answerArray[counter] = {
+                option: option,
+                value: answerArray[option]
+            };
+            delete answerArray[option];
+            counter++;
+        }
+        console.log(answerArray);
         var doc = {
             "user" : user,
             "pollName" : pollName,
@@ -50,6 +60,7 @@ module.exports = {
     },
     
     updatePoll : function (pollID, option, user) {
+        console.log(option);
         var database = db.getDB();
         var collection = database.collection("polls");
         var id = require('mongodb').ObjectID(pollID);
@@ -59,7 +70,7 @@ module.exports = {
         return new Promise(function (resolve, reject) {
             collection.find(query).toArray(function(err, docs) {
                 if (err) console.log(err);
-                docs[0].options[option]++;
+                docs[0].options[option].value++;
                 collection.update(query, docs[0]);
                 resolve(docs[0].options);
             });

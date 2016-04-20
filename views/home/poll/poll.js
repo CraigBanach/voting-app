@@ -1,3 +1,5 @@
+var globalChart;
+
 function updatePage(poll) {
     var pollName = poll.pollName;
     $(".title-text").text(pollName);
@@ -11,17 +13,20 @@ function updatePage(poll) {
             }]
     };
     for (var option in poll.options) {
-        $("#option-holder").append("<p><button id='" + option + "' class='btn btn-default btn-lg'>" + option + ": " + poll.options[option] + "</button></p>");
+        //alert(unencodedOption)
+        $("#option-holder").append("<p><button data='data' id='" + option + "' class='btn btn-default btn-lg'>" + poll.options[option].option + ": " + poll.options[option].value + "</button></p>");
         
         var backgroundColour = randomColor();
         var hoverBackgroundColor = getHoverColour(backgroundColour);
         
-        data.labels.push(option);
-        data.datasets[0].data.push(2);
+        //alert(poll.options[option].option);
+        
+        data.labels.push(poll.options[option].option);
+        data.datasets[0].data.push(poll.options[option].value);
         data.datasets[0].backgroundColor.push(backgroundColour);
         data.datasets[0].hoverBackgroundColor.push(hoverBackgroundColor);
     }
-    $(".btn-lg").click(function() {addClickToPoll(this.id, poll)});
+    
 var ctx = document.getElementById("myChart");
 /*var data = {
     labels: [
@@ -48,6 +53,11 @@ var myChart = new Chart(ctx, {
 		type: 'pie',
 		data: data
 });
+$(".btn-lg").click(function() {
+    addClickToPoll(this.id, poll)
+    updateButtonText(this.id);
+});
+globalChart = myChart;
 }
 
 function getHoverColour(colour) {
@@ -67,8 +77,25 @@ function getHoverColour(colour) {
 
 function addClickToPoll(option, poll) {
     var url = "https://voting-app-cragsify.c9users.io/home/updatepoll"
-    $.get(url, {pollID : poll._id, option: option}).done(
-         function() {alert("hello")});
+    var query = {};
+    query.pollID =  poll._id;
+    query.id = option;
+    $.get(url, {pollID: poll._id, id: option}).done(
+         function(data) {
+             //var ctx = document.getElementById("myChart").getContext("2d");
+             //var myChart = Chart(ctx);
+            //alert(JSON.stringify(ctx));
+            //for (var i = 0; i < data.length)
+            var i = 0;
+            for (var option in data) {
+                globalChart.data.datasets[0].data[i] = data[option].value;
+                globalChart.data.labels[i] = data[option].option;
+                i++;
+            }
+             globalChart.update();
+             globalChart.render();
+
+         });
     /*$.ajax({
         url: url,
         accepts: "application/json",
@@ -79,4 +106,18 @@ function addClickToPoll(option, poll) {
         error: function() {alert("error");},
         success: function() {alert("success");},
     })*/
+}
+
+function updateButtonText(button) {
+    //alert("#" + button);
+    
+    var buttonText = "#" + button;
+    //alert(String(buttonText));
+    var text = $(buttonText).text();
+    
+    //alert(text);
+    var textArray = text.split(": ");
+    var number = Number(textArray[1]) + 1;
+    text = textArray[0] + ": " + number;
+    $("#" + button).text(text);
 }

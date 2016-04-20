@@ -31,19 +31,20 @@ router.get("/poll/*", function(req, res) {
   //console.log("received requrest");
   pollsDB.pullPoll(req.params[0]).then(function (docs) {
     //console.log("sending render request");
+    console.log(docs);
     res.render("home/poll/poll.ejs", {username:req.session.passport.user.username, poll: docs[0]});
   });
 });
 
 router.get("/updatepoll", function(req, res) {
   
-  pollsDB.updatePoll(req.query.pollID, req.query.option, req.session.passport.user.id)
+  pollsDB.updatePoll(req.query.pollID, req.query.id, req.session.passport.user.id)
   .then(function(doc) {
     res.setHeader('Content-Type', 'application/json');
     //res.status(200);
     res.send(doc);
-    console.log(doc);
-    console.log("message sent");
+    //console.log(doc);
+    //console.log("message sent");
   });
 });
 
