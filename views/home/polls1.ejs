@@ -12,18 +12,28 @@
         
     <!-- Font-awesome icons to get access to the githib icon -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    
-    <!-- custom CSS -->
+        
+        <!-- custom CSS -->
     <link rel="stylesheet" href="create.css">
-    
+        
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
-
-    <!-- create.js custom JS -->
-    <script src="./create.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="./polls1.js"></script>
+        
 </head>
 
 <body>
+  
+  <script>
+    
+    $(document).ready(function() {
+      showPolls(<%- JSON.stringify(polls) %>);
+    })
+    
+  </script>
+  
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -39,7 +49,6 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><button onclick="window.location.href='/home/create'" type="button" class="btn btn-primary navbar-btn">Create</button></li>
           <li><button onclick="window.location.href='/home'" type="button" class="btn btn-primary navbar-btn">Home</button></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -49,54 +58,18 @@
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
-  </nav>  
+  </nav>
     
-  <div class="container-fluid">
-    <div class="poll-title text-center">
-      <h1 id="pollTitle">New Poll</h1>
+  <div class="container-fluid text-center">
+        
+        <h1><%= username %>, here are all the polls.</h1>
+        
+        <div id="pollHolder" class="jumbotron btn-group-vertical">
+
+
+
+        </div>
+        
     </div>
     
-    <div class="form-holder">
-      <form class="form-horizontal">
-        <div class="form-group">
-          <div class="col-sm-2"></div>
-          <label for="a" class="col-sm-2 control-label">Poll Name: </label>
-          <div class="col-sm-6">
-          <input type="text" oninput="updatePollName(this.value)" class="form-control" id="pollName" placeholder="My Poll">
-          </div>
-          <div class="col-sm-2"></div>
-        </div>
-        <div class="form-group option1-form">
-          <div class="col-sm-2"></div>
-          <label for="option1" class="col-sm-2 control-label">Option 1: </label>
-          <div class="col-sm-6">
-            <input type="text" oninput="checkNumOptions(this)" class="form-control option-label" id="option1">
-          </div>
-          <div class="col-sm-2"></div>
-          <div class="col-sm-2"></div>
-        </div>
-        <div class="form-group option2-form">
-          <div class="col-sm-2"></div>
-          <label for="option2" class="col-sm-2 control-label">Option 2: </label>
-          <div class="col-sm-6">
-            <input type="text" oninput="checkNumOptions(this)" class="form-control option-label" id="option2">
-          </div>
-          <div class="col-sm-2"></div>
-          <div class="col-sm-2"></div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-2"></div>
-          <div class="col-sm-offset-2 col-sm-8">
-
-
-
-            <button id="submit-button" type="button" class="btn btn-default" onclick="submitPoll()">Save poll</button>
-
-          </div>
-          <div class="col-sm-2"></div>
-        </div>
-      </form>
-    </div>
-  </div>
-
 </body>

@@ -1,3 +1,13 @@
+
+$(document).ready(function() {
+
+    $('.container-fluid').keypress(function(e){
+      if(e.keyCode==13)
+        $("#submit-button").click();
+    });
+})
+
+
 function checkNumOptions(object) {
     var currentOption = object.id.slice(object.id.length - 1);
     var numElements = $(".option-label").size();
@@ -42,7 +52,19 @@ function submitPoll() {
     $.ajax({
         type: 'POST',
         url: 'https://voting-app-cragsify.c9users.io/home/submit',
+
         data: JSON.stringify({pollName: pollName, options: pollOptions}), // or JSON.stringify ({name: 'jonas'}),
         contentType: "application/json",
+
+        accepts: "application/json",
+        //complete: function() {alert("ajax completed");},
+        data: JSON.stringify({pollName: pollName, options: pollOptions}), // or JSON.stringify ({name: 'jonas'}),
+        contentType: "application/json",
+        dataType: "json",
+        error: function() {alert("error");},
+        success: function(data) {
+            window.location.href = "https://voting-app-cragsify.c9users.io/home/poll/" + data;
+        }
+
     });
 }
