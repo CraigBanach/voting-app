@@ -13,30 +13,28 @@
     <!-- Font-awesome icons to get access to the githib icon -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="poll.css">
+        <!-- custom CSS -->
+    <link rel="stylesheet" href="create.css">
         
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
     
-    <!-- Chart.js -->
-    <script src="chart.js/dist/Chart.js"></script>
-    
-    <!-- random colour generator -->
-    <script src="randomcolor/randomColor.js"></script>
-    
-    <!-- custom JS -->
-    <script src="./poll.js"></script>
+    <!-- Custom JS -->
+    <script src="./polls1.js"></script>
+        
 </head>
 
 <body>
+  
   <script>
+    
     $(document).ready(function() {
-      updatePage(<%- JSON.stringify(poll) %>);
+      showPolls(<%- JSON.stringify(polls) %>);
     })
+    
   </script>
   
-    <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -51,9 +49,7 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><button onclick="window.location.href='/home/create'" type="button" class="btn btn-primary navbar-btn">Create</button></li>
           <li><button onclick="window.location.href='/home'" type="button" class="btn btn-primary navbar-btn">Home</button></li>
-          <li><button onclick="deletePoll()" type="button" class="btn btn-primary navbar-btn">Delete Poll</button></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="navbar-brand">
@@ -63,30 +59,17 @@
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-  
-  <div id="main-container"  class="container-fluid">
-    <div class="text-center title-holder">
-          <h1 class="title-text">My Poll</h1>
-    </div>
-    <div class="row">
-      <div class="col-sm-2">
+    
+  <div class="container-fluid text-center">
         
-      </div>
-      <div class="col-sm-3">
-        <h1  id="option-holder"  >
-          
-        </h1>
-      </div>
-      <div id="graph-holder" class="col-sm-5">
-        <canvas id="myChart"></canvas>
-      </div>
-      <div class="col-sm-2">
+        <h1><%= username %>, here are all the polls.</h1>
         
-      </div>
-    </div>
-    <div id="new-options" class="text-center">
-      <button id="new-option" class="btn btn-default" onclick="newOption()">Add new option</button>
-    </div>
-  </div>
+        <div id="pollHolder" class="jumbotron btn-group-vertical">
 
+
+
+        </div>
+        
+    </div>
+    
 </body>
