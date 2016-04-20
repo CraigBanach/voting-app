@@ -24,9 +24,6 @@ module.exports = {
         }
         collection.insert(doc);
         console.log(JSON.stringify(doc) + " Was inserted into the database");
-        return new Promise (function(resolve, reject) {
-            resolve(doc._id);
-        });
     },
     
     findPollForUser : function (userID) {
@@ -76,52 +73,6 @@ module.exports = {
                 docs[0].options[option].value++;
                 collection.update(query, docs[0]);
                 resolve(docs[0].options);
-            });
-        });
-    },
-    
-    deletePoll : function (pollID) {
-        var database = db.getDB();
-        var collection = database.collection("polls");
-        var id = require('mongodb').ObjectID(pollID);
-        var query = {
-            _id: id
-        };
-        collection.deleteOne(query, function(err, results) {
-            if (err) console.log (err);
-            console.log(results);
-        });
-    }, 
-    
-    getAllPolls : function () {
-        var database = db.getDB();
-        var collection = database.collection("polls");
-        return new Promise(function(resolve, reject) {
-            collection.find().toArray(function(err, docs) {
-                if (err) console.log(err);
-                resolve(docs);
-            });
-        });
-    },
-    
-    addOption : function (option, pollID) {
-        var database = db.getDB();
-        var collection = database.collection("polls");
-        var id = require('mongodb').ObjectID(pollID);
-        var query = {
-            _id: id
-        };
-        return new Promise(function (resolve, reject) {
-            collection.find(query).toArray(function(err, docs) {
-                if (err) console.log(err);
-                
-                var newOption = Object.keys(docs[0].options).length;
-                console.log(newOption);
-                docs[0].options[newOption] = {}; 
-                docs[0].options[newOption].option = option;
-                docs[0].options[newOption].value = 0;
-                collection.update(query, docs[0]);
-                resolve(docs[0]);
             });
         });
     }
