@@ -4,7 +4,7 @@ module.exports = {
     createPoll : function (user, pollName, answerArray) {
         var database = db.getDB();
         var collection = database.collection("polls");
-<<<<<<< HEAD
+
         var counter = 0;
         for (var option in answerArray) {
             answerArray[counter] = {
@@ -15,8 +15,7 @@ module.exports = {
             counter++;
         }
         console.log(answerArray);
-=======
->>>>>>> 05f5d7738fc076ea4e00658822edf51fe99ab4b8
+
         var doc = {
             "user" : user,
             "pollName" : pollName,
@@ -27,12 +26,15 @@ module.exports = {
         }
         collection.insert(doc);
         console.log(JSON.stringify(doc) + " Was inserted into the database");
-<<<<<<< HEAD
         return new Promise (function(resolve, reject) {
             resolve(doc._id);
         });
-=======
->>>>>>> 05f5d7738fc076ea4e00658822edf51fe99ab4b8
+
+
+        return new Promise (function(resolve, reject) {
+            resolve(doc._id);
+        });
+
     },
     
     findPollForUser : function (userID) {
@@ -44,11 +46,7 @@ module.exports = {
         return new Promise(function (resolve, reject) {
             collection.find(query).toArray(function(err, docs) {
             if (err) console.log(err);
-<<<<<<< HEAD
-            //console.log(docs);
-=======
             console.log(docs);
->>>>>>> 05f5d7738fc076ea4e00658822edf51fe99ab4b8
             resolve(docs);
             })
         })
@@ -58,7 +56,7 @@ module.exports = {
         var database = db.getDB();
         var collection = database.collection("polls");
         var id = require('mongodb').ObjectID(pollID);
-<<<<<<< HEAD
+
         //console.log(id);
         var query = {
             _id: id
@@ -135,19 +133,6 @@ module.exports = {
                 resolve(docs[0]);
             });
         });
-=======
-        console.log(id);
-        var query = {
-            _id: id
-        };
-        console.log(query);
-        return new Promise(function (resolve, reject) {
-            collection.find(query).toArray(function(err, docs) {
-                if (err) console.log(err);
-                console.log(docs);
-                resolve(docs);
-            });
-        });
->>>>>>> 05f5d7738fc076ea4e00658822edf51fe99ab4b8
+
     }
 };

@@ -8,6 +8,8 @@ var bodyParser = require("body-parser");
 var jsonParser = bodyParser.json({type:"application/json"});
 
 router.get("/", function(req, res) {
+
+
     if (req.session.hasOwnProperty("passport")) {
       pollsDB.findPollForUser(req.session.passport.user.id).then(function(docs) {
           var htmlVariables = {
@@ -43,6 +45,7 @@ router.post("/deletepoll", jsonParser, function(req, res) {
 })
 
 router.get("/poll/*", function(req, res) {
+
   pollsDB.pullPoll(req.params[0]).then(function (docs) {
     if (req.session.hasOwnProperty("passport")) {
       res.render("home/poll/poll.ejs", {username:req.session.passport.user.username, poll: docs[0]});
@@ -90,7 +93,7 @@ router.get("/updatepoll", function(req, res) {
     res.setHeader('Content-Type', 'application/json');
     //res.status(200);
     res.send(doc);
-    console.log(doc);
+
     //console.log("message sent");
   });
 });

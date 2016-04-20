@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 var globalChart;
 
 function updatePage(poll) {
@@ -171,9 +171,7 @@ function addNewOption() {
 $('#option-form').submit(function (evt) {
    evt.preventDefault(); //prevents the default action
 });
-=======
 function updatePage() {
     var pollName = $("#main-container").attr("data");
     
 }
->>>>>>> 05f5d7738fc076ea4e00658822edf51fe99ab4b8
