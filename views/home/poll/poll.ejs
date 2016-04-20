@@ -13,6 +13,7 @@
     <!-- Font-awesome icons to get access to the githib icon -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         
+<<<<<<< HEAD
     <!-- Custom CSS -->
     <link rel="stylesheet" href="poll.css">
         
@@ -25,6 +26,11 @@
     <!-- random colour generator -->
     <script src="randomcolor/randomColor.js"></script>
     
+=======
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+    
+>>>>>>> 05f5d7738fc076ea4e00658822edf51fe99ab4b8
     <!-- custom JS -->
     <script src="./poll.js"></script>
 </head>
@@ -32,7 +38,11 @@
 <body>
   <script>
     $(document).ready(function() {
+<<<<<<< HEAD
       updatePage(<%- JSON.stringify(poll) %>);
+=======
+      updatePage();
+>>>>>>> 05f5d7738fc076ea4e00658822edf51fe99ab4b8
     })
   </script>
   
@@ -52,8 +62,11 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li><button onclick="window.location.href='/home/create'" type="button" class="btn btn-primary navbar-btn">Create</button></li>
+<<<<<<< HEAD
           <li><button onclick="window.location.href='/home'" type="button" class="btn btn-primary navbar-btn">Home</button></li>
           <li><button onclick="deletePoll()" type="button" class="btn btn-primary navbar-btn">Delete Poll</button></li>
+=======
+>>>>>>> 05f5d7738fc076ea4e00658822edf51fe99ab4b8
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="navbar-brand">
@@ -64,6 +77,7 @@
     </div><!-- /.container-fluid -->
   </nav>
   
+<<<<<<< HEAD
   <div id="main-container"  class="container-fluid">
     <div class="text-center title-holder">
           <h1 class="title-text">My Poll</h1>
@@ -89,4 +103,11 @@
     </div>
   </div>
 
+=======
+  <div id="main-container"  class="container-fluid" data=<%= pollName %>>
+    <div class="text-center title-holder">
+          <h1 class="title-text">My Poll</h1>
+    </div>
+  </div>
+>>>>>>> 05f5d7738fc076ea4e00658822edf51fe99ab4b8
 </body>
